@@ -90,7 +90,7 @@ export class BudgetsService {
     try {
       const userBudgets = await this.budgetRepository.find({
         where: { user: userFound },
-        relations: ['categories'],
+        relations: ['user', 'categories.expenses'],
       });
       return userBudgets;
     } catch (error: any) {
