@@ -1,11 +1,14 @@
-import { Controller, Get, Body, Patch, Param, Delete, UseGuards, ParseUUIDPipe, Query, Req } from '@nestjs/common';
+import { Controller, Body, Patch, Param, Delete, UseGuards, Req } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { AuthGuard } from '../auth/guard/auth.guard';
 import { RequestResetPasswordDto } from './dto/request-reset-password.dto';
 import { ResetPasswordDto } from './dto/reset-password.dto';
 import { RequestWithUser } from 'src/common/interfaces/request-with-user.interface';
+import { ApiBearerAuth, ApiTags, ApiOperation } from '@nestjs/swagger';
 
+@ApiTags('Users')
+@ApiBearerAuth()
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
@@ -23,6 +26,7 @@ export class UsersController {
   }
 
   @Patch('/request-password')
+  @ApiOperation({ summary: 'Request a token to reset the password' })
   requestResetPassword(
     @Body() requestResetPasswordDto: RequestResetPasswordDto,
   ) {
@@ -30,6 +34,7 @@ export class UsersController {
   }
 
   @Patch('/reset-password')
+  @ApiOperation({ summary: 'Reset password with password-token' })
   resetPassword(@Body() resetPasswordDto: ResetPasswordDto): Promise<void> {
     return this.usersService.resetPassword(resetPasswordDto);
   }
