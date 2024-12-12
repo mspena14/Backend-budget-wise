@@ -23,7 +23,9 @@ export class HttpErrorFilter implements ExceptionFilter {
       }
 
       if (status === HttpStatus.UNAUTHORIZED) {
-        message = 'Unauthorized access';
+        if (typeof errorResponse === 'string') {
+          message = errorResponse;
+        }
       } else if (status === HttpStatus.FORBIDDEN) {
         message = 'Forbidden resource';
       }

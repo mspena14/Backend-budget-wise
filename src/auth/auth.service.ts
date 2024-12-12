@@ -24,13 +24,11 @@ export class AuthService {
     const user: User = await this.userService.findOneByEmail(email);
 
     if (!user) {
-      throw new UnauthorizedException('Invalid credentials');
+      throw new UnauthorizedException('Email not registered');
     }
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid) { 
-      console.log('error en la contraseña');
-      
       throw new UnauthorizedException('Invalid credentials');
     }
 
