@@ -46,7 +46,7 @@ export class CategoriesService {
   async findCategoryById(id: string, userId: string): Promise<Category> {
     const userFound = await this.usersService.validateUserExistence(userId);
     const categoryFound = await this.categoryRepository.findOne({
-      where: { id, budget: { user: userFound }}, relations:['budget.user']
+      where: { id, budget: { user: userFound }}, relations:['budget.user', 'expenses']
     });
 
     if (!categoryFound) throw new NotFoundException('Category not found');
