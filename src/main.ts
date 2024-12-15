@@ -22,7 +22,7 @@ async function bootstrap() {
   }));
   app.useGlobalFilters(new HttpErrorFilter());
   const config = new DocumentBuilder()
-  .setTitle('Parking now API')
+  .setTitle('Budget Wise API')
   .setDescription('This is the documentation for our API, here you will find all our endpoints, how to access them and what responses they will give. ')
   .setVersion('1.0')
   .addBearerAuth()
