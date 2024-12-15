@@ -66,16 +66,16 @@ export class ExpensesService {
     const newTotalExpenses = totalExpenses + parsedAmount;
     console.log(newTotalExpenses);
 
-    if (totalExpenses < category.amount * 0.7) {
-      if (newTotalExpenses >= category.amount * 0.7) {
-        await this.notificationsService.notifyUserAboutBudgetExceed(
-          userId,
-          category.amount,
-          parsedAmount,
-          newTotalExpenses,
-        );
-      }
-    }
+    // if (totalExpenses < category.amount * 0.7) {
+    //   if (newTotalExpenses >= category.amount * 0.7) {
+    //     await this.notificationsService.notifyUserAboutBudgetExceed(
+    //       userId,
+    //       category.amount,
+    //       parsedAmount,
+    //       newTotalExpenses,
+    //     );
+    //   }
+    // }
 
     const newExpense = this.expenseRepository.create({
       ...createExpenseDto,
